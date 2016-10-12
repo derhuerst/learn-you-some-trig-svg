@@ -5,11 +5,11 @@ var yo = require('yo-yo');
 
 var render = require('./render');
 
-var dom = render(0);
+var dom = render(Math.PI / 4, 40);
 document.body.appendChild(dom);
 
 var loop = function () {
-	yo.update(dom, render(0));
+	yo.update(dom, render(Math.PI / 4, 40));
 	requestAnimationFrame(loop);
 };
 requestAnimationFrame(loop);
@@ -1300,14 +1300,46 @@ module.exports = [
 },{}],12:[function(require,module,exports){
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['\n\t<svg id="trig" viewBox="0 0 100 100">\n\t\t<circle cx="50" cy="50" r="19"/>\n\t</svg>'], ['\n\t<svg id="trig" viewBox="0 0 100 100">\n\t\t<circle cx="50" cy="50" r="19"/>\n\t</svg>']);
+var _templateObject = _taggedTemplateLiteral(['\n\t\t<polygon points="', '"/>'], ['\n\t\t<polygon points="', '"/>']),
+    _templateObject2 = _taggedTemplateLiteral(['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<defs>\n\t\t\t<clipPath id="angle">\n\t\t\t\t', '\n\t\t\t</clipPath>\n\t\t</defs>\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<path class="opposite" d="M ', ',0 v ', '" />\n\t\t<path class="opposite-mirror" d="M 0,0 v ', '" />\n\t\t<path class="adjacent" d="M 0,0 h ', '" />\n\t\t<path class="adjacent-mirror" d="M 0,', ' h ', '" />\n\t\t<circle class="angle" cx="0" cy="0" r="', '" clip-path="url(#angle)" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>'], ['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<defs>\n\t\t\t<clipPath id="angle">\n\t\t\t\t', '\n\t\t\t</clipPath>\n\t\t</defs>\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<path class="opposite" d="M ', ',0 v ', '" />\n\t\t<path class="opposite-mirror" d="M 0,0 v ', '" />\n\t\t<path class="adjacent" d="M 0,0 h ', '" />\n\t\t<path class="adjacent-mirror" d="M 0,', ' h ', '" />\n\t\t<circle class="angle" cx="0" cy="0" r="', '" clip-path="url(#angle)" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var yo = require('yo-yo');
 
-var render = function (rad) {
-	return yo(_templateObject);
+var clip = function (alpha, r) {
+	var points = [[0, 0]]; // start at the center
+
+	// add helper edges to fully contain the clock
+	points.push([0, -r]); // middle top
+	if (alpha >= 1 / 8) points.push([r, -r]); // right  top
+	if (alpha >= 2 / 8) points.push([r, 0]); // right  middle
+	if (alpha >= 3 / 8) points.push([r, r]); // right  bottom
+	if (alpha >= 4 / 8) points.push([0, r]); // middle bottom
+	if (alpha >= 5 / 8) points.push([-r, r]); // left   bottom
+	if (alpha >= 6 / 8) points.push([-r, 0]); // left   middle
+	if (alpha >= 7 / 8) points.push([-r, -r]); // left   top
+
+	// add the actual edge to cut the ring off
+	points.push([x(alpha, r), y(alpha, r)]);
+
+	return yo(_templateObject, points.map(function (p) {
+		return _(p[0]) + ',' + _(p[1]);
+	}).join(' '));
+};
+
+var _ = function (x) {
+	return Math.round(x * 10000) / 10000;
+};
+var x = function (a, r) {
+	return _(Math.cos(a)) * r;
+};
+var y = function (a, r) {
+	return _(Math.sin(a)) * r;
+};
+
+var render = function (alpha, r) {
+	return yo(_templateObject2, clip(alpha, 10), r, r + 10, r + 10, r + 10, r + 10, x(alpha, r), y(alpha, r), x(alpha, r), y(alpha, r), y(alpha, r), x(alpha, r), y(alpha, r), x(alpha, r), r / 10);
 };
 
 module.exports = render;

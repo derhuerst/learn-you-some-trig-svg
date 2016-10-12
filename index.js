@@ -4,11 +4,11 @@ const yo = require('yo-yo')
 
 const render = require('./render')
 
-const dom = render(0)
+const dom = render(Math.PI/4, 40)
 document.body.appendChild(dom)
 
 const loop = () => {
-	yo.update(dom, render(0))
+	yo.update(dom, render(Math.PI/4, 40))
 	requestAnimationFrame(loop)
 }
 requestAnimationFrame(loop)

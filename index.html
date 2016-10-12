@@ -16,9 +16,32 @@
 			height: 100vh; /* fix chrome :( */
 			max-height: 100vh;
 		}
-		#trig circle {
+		#trig .circle {
 			fill: none;
-			stroke: #D05931; stroke-width: 5;
+			stroke: black; stroke-width: .2;
+		}
+		#trig .x-axis, #trig .y-axis {
+			stroke: black; stroke-width: .2;
+		}
+		#trig .hypotenuse {
+			fill: none;
+			stroke: green; stroke-width: .5;
+		}
+		#trig .opposite, #trig .opposite-mirror {
+			fill: none;
+			stroke: blue; stroke-width: .5;
+		}
+		#trig .adjacent, #trig .adjacent-mirror {
+			fill: none;
+			stroke: red; stroke-width: .5;
+		}
+		#trig .angle {
+			fill: green;
+			stroke-width: 0;
+		}
+		#trig .center {
+			fill: black;
+			stroke-width: 0;
 		}
 	</style>
 	<script type="application/javascript" src="dist/bundle.min.js"></script>
