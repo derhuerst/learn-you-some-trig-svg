@@ -16,6 +16,7 @@
 			height: 100vh; /* fix chrome :( */
 			max-height: 100vh;
 		}
+
 		#trig .circle {
 			fill: none;
 			stroke: black; stroke-width: .3;
@@ -23,33 +24,30 @@
 		#trig .x-axis, #trig .y-axis {
 			stroke: black; stroke-width: .3;
 		}
-		#trig .hypotenuse {
+
+		#trig .hypotenuse,
+		#trig .opposite .axis, #trig .opposite .mirror,
+		#trig .adjacent .axis, #trig .adjacent .mirror {
 			fill: none;
-			stroke: green; stroke-width: .5;
+			stroke-width: .7;
 		}
-		#trig .opposite-area {
-			fill: blue;
+		#trig .hypotenuse { stroke: green; }
+		#trig .opposite .axis, #trig .opposite .mirror { stroke: blue; }
+		#trig .adjacent .axis, #trig .adjacent .mirror { stroke: red; }
+
+		#trig .opposite .area, #trig .adjacent .area {
 			stroke-width: 0;
 			opacity: .2;
 		}
-		#trig .opposite, #trig .opposite-mirror {
-			fill: none;
-			stroke: blue; stroke-width: .7;
-		}
-		#trig .adjacent-area {
-			fill: red;
-			stroke-width: 0;
-			opacity: .2;
-		}
-		#trig .adjacent, #trig .adjacent-mirror {
-			fill: none;
-			stroke: red; stroke-width: .7;
-		}
+		#trig .opposite .area { fill: blue; }
+		#trig .adjacent .area { fill: red; }
+
 		#trig .angle {
 			fill: green;
 			stroke-width: 0;
 			opacity: .3;
 		}
+
 		#trig .center {
 			fill: black;
 			stroke-width: 0;

@@ -44,12 +44,16 @@ const render = (alpha, r) => {
 		<polyline class="y-axis" points="0,-${s} 0,${s}" />
 		<circle class="angle" cx="0" cy="0" r="${r / 5}" clip-path="url(#angle)" />
 		<path class="hypotenuse" d="M 0,0 l ${a} ${o}" />
-		<path class="opposite-area" d="M -${s},0 v ${o} h ${2 * s} v ${-o} h ${-2 * s}" />
-		<path class="opposite" d="M ${a},0 v ${o}" />
-		<path class="opposite-mirror" d="M 0,0 v ${o}" />
-		<path class="adjacent-area" d="M 0,-${s} h ${o} v ${2 * s} h ${-o} v ${-2 * s}" />
-		<path class="adjacent" d="M 0,0 h ${a}" />
-		<path class="adjacent-mirror" d="M 0,${o} h ${a}" />
+		<g class="opposite">
+			<path class="area" d="M -${s},0 v ${o} h ${2 * s} v ${-o} h ${-2 * s}" />
+			<path class="axis" d="M ${a},0 v ${o}" />
+			<path class="mirror" d="M 0,0 v ${o}" />
+		</g>
+		<g class="adjacent">
+			<path class="area" d="M 0,-${s} h ${o} v ${2 * s} h ${-o} v ${-2 * s}" />
+			<path class="axis" d="M 0,0 h ${a}" />
+			<path class="mirror" d="M 0,${o} h ${a}" />
+		</g>
 		<circle class="center" cx="0" cy="0" r="1" />
 	</svg>`
 }
