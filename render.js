@@ -26,7 +26,7 @@ const clip = (alpha, r) => {
 			.join(' ')}"/>`
 }
 
-const _ = (x) => Math.round(x * 10000) / 10000
+const _ = (x, p = 4) => Math.round(x * Math.pow(10, p)) / Math.pow(10, p)
 const x = (a, r) => _(Math.cos(a)) * r
 const y = (a, r) => _(Math.sin(a)) * r
 
@@ -46,11 +46,13 @@ const render = (alpha, r) => {
 		<path class="hypotenuse" d="M 0,0 l ${a} ${o}" />
 		<g class="opposite">
 			<path class="area" d="M -${s},0 v ${o} h ${2 * s} v ${-o} h ${-2 * s}" />
+			<text class="caption" x="${a + 2}" y="${o / 2}">sin(α) = ${_(Math.sin(alpha), 1)}</text>
 			<path class="axis" d="M ${a},0 v ${o}" />
 			<path class="mirror" d="M 0,0 v ${o}" />
 		</g>
 		<g class="adjacent">
 			<path class="area" d="M 0,-${s} h ${o} v ${2 * s} h ${-o} v ${-2 * s}" />
+			<text class="caption" x="${a / 2}" y="${o + 5}">cos(α) = ${_(Math.cos(alpha), 1)}</text>
 			<path class="axis" d="M 0,0 h ${a}" />
 			<path class="mirror" d="M 0,${o} h ${a}" />
 		</g>
