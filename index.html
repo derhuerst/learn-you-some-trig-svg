@@ -9,12 +9,21 @@
 	<style>
 		body {
 			margin: 0; padding: 0;
-			display: flex; justify-content: center;
 			background-color: white;
 		}
+
+		#slider {
+			margin: 0 auto;
+			display: block;
+			width: 90%;
+		}
+
 		#trig {
-			height: 100vh; /* fix chrome :( */
-			max-height: 100vh;
+			display: block;
+			margin: 0 auto;
+			width: 80vh; /* fix chrome :( */
+			max-width: 80vw;
+			max-height: 80vh;
 		}
 
 		#trig .circle {
@@ -62,6 +71,7 @@
 			stroke-width: 0;
 		}
 	</style>
+	<input type="range" id="slider" min="0" max="1" step="0.01" />
 	<script type="application/javascript" src="dist/bundle.min.js"></script>
 	<!-- stuff will be here -->
 </body>

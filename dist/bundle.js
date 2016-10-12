@@ -5,14 +5,21 @@ var yo = require('yo-yo');
 
 var render = require('./render');
 
-var dom = render(Math.PI / 4, 40);
+var dom = render(0, 40);
 document.body.appendChild(dom);
 
-var loop = function () {
-	yo.update(dom, render(Math.PI / 4, 40));
-	requestAnimationFrame(loop);
+var slider = document.querySelector('#slider');
+var update = function () {
+	yo.update(dom, render(Math.PI * 2 * slider.value, 40));
 };
-requestAnimationFrame(loop);
+
+slider.addEventListener('change', update);
+slider.addEventListener('mousedown', function () {
+	slider.addEventListener('mousemove', update);
+});
+slider.addEventListener('mouseup', function () {
+	slider.removeEventListener('mousemove', update);
+});
 },{"./render":12,"yo-yo":10}],2:[function(require,module,exports){
 var document = require('global/document')
 var hyperx = require('hyperx')
