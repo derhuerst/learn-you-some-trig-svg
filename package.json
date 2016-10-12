@@ -1,0 +1,11 @@
+{
+	"name":        "learn-you-some-trig-svg",
+	"description": "Learn trigonometry interactively. Done with yo-yo & SVG.",
+	"version":     "0.1.0",
+	"keywords":    ["yo-yo", "yoyo", "svg", "trigonometry", "math"],
+	"author":      "Jannis R <mail@jannisr.de>",
+	"homepage":    "https://github.com/derhuerst/learn-you-some-trig-svg",
+	"repository":  "derhuerst/learn-you-some-trig-svg",
+	"bugs":        "https://github.com/derhuerst/learn-you-some-trig-svg/issues",
+	"license":     "ISC"
+}
