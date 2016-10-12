@@ -30,23 +30,28 @@ const _ = (x) => Math.round(x * 10000) / 10000
 const x = (a, r) => _(Math.cos(a)) * r
 const y = (a, r) => _(Math.sin(a)) * r
 
-const render = (alpha, r) => yo `
+const render = (alpha, r) => {
+	const s = r + 10
+	const o = y(alpha, r)
+	const a = x(alpha, r)
+	return yo `
 	<svg id="trig" viewBox="-50 -50 100 100">
 		<defs>
-			<clipPath id="angle">
-				${clip(alpha, 10)}
-			</clipPath>
+			<clipPath id="angle">${clip(alpha, r / 5)}</clipPath>
 		</defs>
 		<circle class="circle" cx="0" cy="0" r="${r}" />
-		<polyline class="x-axis" points="-${r + 10},0 ${r + 10},0" />
-		<polyline class="y-axis" points="0,-${r + 10} 0,${r + 10}" />
-		<path class="hypotenuse" d="M 0,0 l ${x(alpha, r)} ${y(alpha, r)}" />
-		<path class="opposite" d="M ${x(alpha, r)},0 v ${y(alpha, r)}" />
-		<path class="opposite-mirror" d="M 0,0 v ${y(alpha, r)}" />
-		<path class="adjacent" d="M 0,0 h ${x(alpha, r)}" />
-		<path class="adjacent-mirror" d="M 0,${y(alpha, r)} h ${x(alpha, r)}" />
-		<circle class="angle" cx="0" cy="0" r="${r / 10}" clip-path="url(#angle)" />
+		<polyline class="x-axis" points="-${s},0 ${s},0" />
+		<polyline class="y-axis" points="0,-${s} 0,${s}" />
+		<circle class="angle" cx="0" cy="0" r="${r / 5}" clip-path="url(#angle)" />
+		<path class="hypotenuse" d="M 0,0 l ${a} ${o}" />
+		<path class="opposite-area" d="M -${s},0 v ${o} h ${2 * s} v ${-o} h ${-2 * s}" />
+		<path class="opposite" d="M ${a},0 v ${o}" />
+		<path class="opposite-mirror" d="M 0,0 v ${o}" />
+		<path class="adjacent-area" d="M 0,-${s} h ${o} v ${2 * s} h ${-o} v ${-2 * s}" />
+		<path class="adjacent" d="M 0,0 h ${a}" />
+		<path class="adjacent-mirror" d="M 0,${o} h ${a}" />
 		<circle class="center" cx="0" cy="0" r="1" />
 	</svg>`
+}
 
 module.exports = render

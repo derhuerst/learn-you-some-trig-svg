@@ -1301,7 +1301,7 @@ module.exports = [
 'use strict';
 
 var _templateObject = _taggedTemplateLiteral(['\n\t\t<polygon points="', '"/>'], ['\n\t\t<polygon points="', '"/>']),
-    _templateObject2 = _taggedTemplateLiteral(['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<defs>\n\t\t\t<clipPath id="angle">\n\t\t\t\t', '\n\t\t\t</clipPath>\n\t\t</defs>\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<path class="opposite" d="M ', ',0 v ', '" />\n\t\t<path class="opposite-mirror" d="M 0,0 v ', '" />\n\t\t<path class="adjacent" d="M 0,0 h ', '" />\n\t\t<path class="adjacent-mirror" d="M 0,', ' h ', '" />\n\t\t<circle class="angle" cx="0" cy="0" r="', '" clip-path="url(#angle)" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>'], ['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<defs>\n\t\t\t<clipPath id="angle">\n\t\t\t\t', '\n\t\t\t</clipPath>\n\t\t</defs>\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<path class="opposite" d="M ', ',0 v ', '" />\n\t\t<path class="opposite-mirror" d="M 0,0 v ', '" />\n\t\t<path class="adjacent" d="M 0,0 h ', '" />\n\t\t<path class="adjacent-mirror" d="M 0,', ' h ', '" />\n\t\t<circle class="angle" cx="0" cy="0" r="', '" clip-path="url(#angle)" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>']);
+    _templateObject2 = _taggedTemplateLiteral(['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<defs>\n\t\t\t<clipPath id="angle">', '</clipPath>\n\t\t</defs>\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<circle class="angle" cx="0" cy="0" r="', '" clip-path="url(#angle)" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<path class="opposite-area" d="M -', ',0 v ', ' h ', ' v ', ' h ', '" />\n\t\t<path class="opposite" d="M ', ',0 v ', '" />\n\t\t<path class="opposite-mirror" d="M 0,0 v ', '" />\n\t\t<path class="adjacent-area" d="M 0,-', ' h ', ' v ', ' h ', ' v ', '" />\n\t\t<path class="adjacent" d="M 0,0 h ', '" />\n\t\t<path class="adjacent-mirror" d="M 0,', ' h ', '" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>'], ['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<defs>\n\t\t\t<clipPath id="angle">', '</clipPath>\n\t\t</defs>\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<circle class="angle" cx="0" cy="0" r="', '" clip-path="url(#angle)" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<path class="opposite-area" d="M -', ',0 v ', ' h ', ' v ', ' h ', '" />\n\t\t<path class="opposite" d="M ', ',0 v ', '" />\n\t\t<path class="opposite-mirror" d="M 0,0 v ', '" />\n\t\t<path class="adjacent-area" d="M 0,-', ' h ', ' v ', ' h ', ' v ', '" />\n\t\t<path class="adjacent" d="M 0,0 h ', '" />\n\t\t<path class="adjacent-mirror" d="M 0,', ' h ', '" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -1339,7 +1339,10 @@ var y = function (a, r) {
 };
 
 var render = function (alpha, r) {
-	return yo(_templateObject2, clip(alpha, 10), r, r + 10, r + 10, r + 10, r + 10, x(alpha, r), y(alpha, r), x(alpha, r), y(alpha, r), y(alpha, r), x(alpha, r), y(alpha, r), x(alpha, r), r / 10);
+	var s = r + 10;
+	var o = y(alpha, r);
+	var a = x(alpha, r);
+	return yo(_templateObject2, clip(alpha, r / 5), r, s, s, s, s, r / 5, a, o, s, o, 2 * s, -o, -2 * s, a, o, o, s, o, 2 * s, -o, -2 * s, a, o, a);
 };
 
 module.exports = render;
