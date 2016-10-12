@@ -11,6 +11,7 @@ const slider = document.querySelector('#slider')
 const update = () => {
 	yo.update(dom, render(Math.PI * 2 * slider.value, 40))
 }
+update()
 
 slider.addEventListener('change', update)
 slider.addEventListener('mousedown', () => {
