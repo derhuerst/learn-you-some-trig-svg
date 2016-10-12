@@ -3,8 +3,17 @@
 
 var yo = require('yo-yo');
 
-// todo
-},{"yo-yo":10}],2:[function(require,module,exports){
+var render = require('./render');
+
+var dom = render(0);
+document.body.appendChild(dom);
+
+var loop = function () {
+	yo.update(dom, render(0));
+	requestAnimationFrame(loop);
+};
+requestAnimationFrame(loop);
+},{"./render":12,"yo-yo":10}],2:[function(require,module,exports){
 var document = require('global/document')
 var hyperx = require('hyperx')
 var onload = require('on-load')
@@ -1288,4 +1297,18 @@ module.exports = [
   'onfocusout'
 ]
 
-},{}]},{},[1]);
+},{}],12:[function(require,module,exports){
+'use strict';
+
+var _templateObject = _taggedTemplateLiteral(['\n\t<svg id="trig" viewBox="0 0 100 100">\n\t\t<circle cx="50" cy="50" r="19"/>\n\t</svg>'], ['\n\t<svg id="trig" viewBox="0 0 100 100">\n\t\t<circle cx="50" cy="50" r="19"/>\n\t</svg>']);
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var yo = require('yo-yo');
+
+var render = function (rad) {
+	return yo(_templateObject);
+};
+
+module.exports = render;
+},{"yo-yo":10}]},{},[1]);
