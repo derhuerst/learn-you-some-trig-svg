@@ -21,7 +21,7 @@ slider.addEventListener('mousedown', function () {
 slider.addEventListener('mouseup', function () {
 	slider.removeEventListener('mousemove', update);
 });
-},{"./render":12,"yo-yo":10}],2:[function(require,module,exports){
+},{"./render":13,"yo-yo":11}],2:[function(require,module,exports){
 var document = require('global/document')
 var hyperx = require('hyperx')
 var onload = require('on-load')
@@ -1232,6 +1232,26 @@ function eachMutation (nodes, fn) {
 }
 
 },{"global/document":4,"global/window":5}],10:[function(require,module,exports){
+'use strict'
+
+// from http://stackoverflow.com/a/18473154
+const partialCircle = (cx, cy, r, start, end) => {
+	const fromX = cx + r * Math.cos(end)
+	const fromY = cy + r * Math.sin(end)
+	const toX = cx + r * Math.cos(start)
+	const toY = cy + r * Math.sin(start)
+	const large = (end - start) <= Math.PI ? '0' : '1'
+
+	if ((end - start) === 0) return []
+	return [
+		['M', fromX, fromY],
+		['A', r, r, 0, large, 0, toX, toY]
+	]
+}
+
+module.exports = partialCircle
+
+},{}],11:[function(require,module,exports){
 var bel = require('bel') // turns template tag into DOM elements
 var morphdom = require('morphdom') // efficiently diffs + morphs two DOM elements
 var defaultEvents = require('./update-events.js') // default events to be copied when dom elements update
@@ -1267,7 +1287,7 @@ module.exports.update = function (fromNode, toNode, opts) {
   }
 }
 
-},{"./update-events.js":11,"bel":2,"morphdom":8}],11:[function(require,module,exports){
+},{"./update-events.js":12,"bel":2,"morphdom":8}],12:[function(require,module,exports){
 module.exports = [
   // attribute events (can be set with attributes)
   'onclick',
@@ -1305,14 +1325,15 @@ module.exports = [
   'onfocusout'
 ]
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
-var _templateObject = _taggedTemplateLiteral(['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<g class="opposite">\n\t\t\t<path class="area" d="M -', ',0 v ', ' h ', ' v ', ' h ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">sin(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M ', ',0 v ', '" />\n\t\t\t<path class="mirror" d="M 0,0 v ', '" />\n\t\t</g>\n\t\t<g class="adjacent">\n\t\t\t<path class="area" d="M 0,-', ' h ', ' v ', ' h ', ' v ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">cos(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M 0,0 h ', '" />\n\t\t\t<path class="mirror" d="M 0,', ' h ', '" />\n\t\t</g>\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>'], ['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<g class="opposite">\n\t\t\t<path class="area" d="M -', ',0 v ', ' h ', ' v ', ' h ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">sin(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M ', ',0 v ', '" />\n\t\t\t<path class="mirror" d="M 0,0 v ', '" />\n\t\t</g>\n\t\t<g class="adjacent">\n\t\t\t<path class="area" d="M 0,-', ' h ', ' v ', ' h ', ' v ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">cos(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M 0,0 h ', '" />\n\t\t\t<path class="mirror" d="M 0,', ' h ', '" />\n\t\t</g>\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>']);
+var _templateObject = _taggedTemplateLiteral(['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<g class="opposite">\n\t\t\t<path class="area" d="M -', ',0 v ', ' h ', ' v ', ' h ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">sin(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M ', ',0 v ', '" />\n\t\t\t<path class="mirror" d="M 0,0 v ', '" />\n\t\t</g>\n\t\t<g class="adjacent">\n\t\t\t<path class="area" d="M 0,-', ' h ', ' v ', ' h ', ' v ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">cos(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M 0,0 h ', '" />\n\t\t\t<path class="mirror" d="M 0,', ' h ', '" />\n\t\t</g>\n\t\t<path class="angle" d="', '" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>'], ['\n\t<svg id="trig" viewBox="-50 -50 100 100">\n\t\t<circle class="circle" cx="0" cy="0" r="', '" />\n\t\t<polyline class="x-axis" points="-', ',0 ', ',0" />\n\t\t<polyline class="y-axis" points="0,-', ' 0,', '" />\n\t\t<path class="hypotenuse" d="M 0,0 l ', ' ', '" />\n\t\t<g class="opposite">\n\t\t\t<path class="area" d="M -', ',0 v ', ' h ', ' v ', ' h ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">sin(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M ', ',0 v ', '" />\n\t\t\t<path class="mirror" d="M 0,0 v ', '" />\n\t\t</g>\n\t\t<g class="adjacent">\n\t\t\t<path class="area" d="M 0,-', ' h ', ' v ', ' h ', ' v ', '" />\n\t\t\t<text class="caption" x="', '" y="', '">cos(\u03B1) = ', '</text>\n\t\t\t<path class="axis" d="M 0,0 h ', '" />\n\t\t\t<path class="mirror" d="M 0,', ' h ', '" />\n\t\t</g>\n\t\t<path class="angle" d="', '" />\n\t\t<circle class="center" cx="0" cy="0" r="1" />\n\t</svg>']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var yo = require('yo-yo');
+var partialCircle = require('svg-partial-circle');
 
 var _ = function (x, p = 4) {
 	return Math.round(x * Math.pow(10, p)) / Math.pow(10, p);
@@ -1324,12 +1345,22 @@ var y = function (a, r) {
 	return Math.sin(Math.PI * 2 - a) * r;
 };
 
+var angle = function (cx, cy, r, start, end) {
+	var d = partialCircle(cx, cy, r, start, end);
+	if (d.length === 0) return d;
+	d[0][0] = 'l';
+	return [['M', 0, 0], ...d, ['L', 0, 0], ['z']].map(function (c) {
+		return c.join(' ');
+	}).join(' ');
+};
+
 var render = function (alpha, r) {
 	var s = r + 10;
 	var o = _(y(alpha, r));
 	var a = _(x(alpha, r));
-	return yo(_templateObject, r, s, s, s, s, a, o, s, o, 2 * s, -o, -2 * s, a + 2, o / 2, -_(y(alpha, 1), 1), a, o, o, s, a, 2 * s, -a, -2 * s, a / 2, o + 5, _(x(alpha, 1), 1), a, o, a);
+
+	return yo(_templateObject, r, s, s, s, s, a, o, s, o, 2 * s, -o, -2 * s, a + 2, o / 2, -_(y(alpha, 1), 1), a, o, o, s, a, 2 * s, -a, -2 * s, a / 2, o + 5, _(x(alpha, 1), 1), a, o, a, angle(0, 0, r / 5, 0, 2 * Math.PI - alpha));
 };
 
 module.exports = render;
-},{"yo-yo":10}]},{},[1]);
+},{"svg-partial-circle":10,"yo-yo":11}]},{},[1]);
